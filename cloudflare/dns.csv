@@ -1,7 +1,16 @@
 Type,Name,Content,Proxy status,TTL,Comment
-CNAME,@,spacebum9.github.io,DNS only,Auto,Apex flattening to GitHub Pages — grey cloud until cert works
-CNAME,www,spacebum9.github.io,DNS only,Auto,www to Pages
-TXT,_github-pages-challenge-spacebum9,PENDING,DNS only,Auto,replace with GitHub challenge token when Pages asks
-TXT,_hold,"MCT-ATM HOLD 2026-09-18 public=moreatm.com owner-hidden",DNS only,Auto,Trace
-TXT,@,"v=spf1 -all",DNS only,Auto,no mail
-TXT,_dmarc,"v=DMARC1; p=reject; adkim=s; aspf=s",DNS only,Auto,reject spoof
+A,@,185.199.108.153,DNS only,Auto,GitHub Pages apex IPv4
+A,@,185.199.109.153,DNS only,Auto,GitHub Pages apex IPv4
+A,@,185.199.110.153,DNS only,Auto,GitHub Pages apex IPv4
+A,@,185.199.111.153,DNS only,Auto,GitHub Pages apex IPv4
+AAAA,@,2606:50c0:8000::153,DNS only,Auto,GitHub Pages apex IPv6
+AAAA,@,2606:50c0:8001::153,DNS only,Auto,GitHub Pages apex IPv6
+AAAA,@,2606:50c0:8002::153,DNS only,Auto,GitHub Pages apex IPv6
+AAAA,@,2606:50c0:8003::153,DNS only,Auto,GitHub Pages apex IPv6
+CNAME,www,spacebum9.github.io,DNS only,Auto,www — target user host only no /moreatm
+TXT,_github-pages-challenge-spacebum9,PENDING,DNS only,Auto,replace with GitHub token
+TXT,@,v=spf1 -all,DNS only,Auto,deny mail
+TXT,_dmarc,v=DMARC1; p=reject; adkim=s; aspf=s,DNS only,Auto,reject spoof
+TXT,_hold,MCT-ATM HOLD public=moreatm.com owner-hidden,DNS only,Auto,trace
+CAA,@,0 issue "letsencrypt.org",DNS only,Auto,GitHub Pages certs
+CAA,@,0 issuewild ";",DNS only,Auto,no wildcard
