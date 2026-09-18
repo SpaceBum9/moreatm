@@ -1,40 +1,27 @@
 # moreatm.com — MCT / GARAS ATM-Fläche
 
-Öffentliche Übergabeschicht. Vorschlag ≠ Ausführung.
+Live (GitHub Pages, Projektseite):
+**https://spacebum9.github.io/moreatm/**
+
+Custom Domain moreatm.com bleibt HOLD, bis Cloudflare-NS stehen.
 
 | Schicht | Ort |
 |---|---|
-| ATM-Fläche | this repo → Cloudflare Pages → moreatm.com |
+| ATM-Fläche | diese Pages-URL |
 | Systemkarte | https://mct-garas-system.crystalmike.chatgpt.site |
 | Governance | https://github.com/SpaceBum9/MCT-1700021 |
 | Runtime | https://github.com/SpaceBum9/MCT-2600027 |
 
-Status: **HOLD** bis Cloudflare-Zone Active und Custom Domain gebunden.
+## Pages
 
-## Was hier nicht passiert
+Quelle: GitHub Actions Workflow `.github/workflows/pages.yml`
+Branch: `main`
+Artifact: nur `index.html` (kein Worker, keine API)
 
-- kein Send / Withdraw
-- kein Autopilot
-- keine Ableitung von Berechtigung aus Domain-Existenz
-- PayPal-Pool nur observe-only
+Falls der erste Lauf auf "Pages is not configured" läuft:
+Repo → Settings → Pages → Source = **GitHub Actions** → Save.
+Danach Actions → Deploy GitHub Pages → Run workflow.
 
-## Cloudflare — einmalig im Dashboard
+## Grenze
 
-1. Domain `moreatm.com` besitzen / Registrar offen.
-2. dash.cloudflare.com → Add a domain → `moreatm.com`.
-3. Angezeigte Nameserver beim Registrar setzen.
-4. Warten auf Zone **Active**.
-5. Workers & Pages → Create → Connect to Git → `SpaceBum9/moreatm` → project name `moreatm` → production branch `main` → output `/` (static).
-6. Custom domains: `moreatm.com` + `www.moreatm.com`.
-7. DNS-Import: Datei `cloudflare/dns.csv` (siehe unten) oder Records manuell.
-8. SSL/TLS: Full (strict) nach Pages-Bindung. Always HTTPS On. Min TLS 1.2.
-
-Namen der Cloudflare-NS sind account-spezifisch. Nicht raten — nur die zwei aus *dieser* Zone verwenden.
-
-## Dateien
-
-- `index.html` — öffentliche Fläche
-- `wrangler.toml` + `src/worker.js` — optionaler Worker-Origin
-- `cloudflare/dns.csv` — BIND-kompatibler Import
-- `cloudflare/HOLD.md` — Trace
-- `_headers` / `_redirects` — Pages
+Vorschlag ≠ Ausführung. Kein Send/Withdraw.
