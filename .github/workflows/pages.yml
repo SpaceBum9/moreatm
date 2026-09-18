@@ -7,6 +7,7 @@ on:
       - "index.html"
       - "404.html"
       - "robots.txt"
+      - "CNAME"
       - ".nojekyll"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -42,12 +43,12 @@ jobs:
           import json
           d=json.load(open("/tmp/pages.json"))
           print("html_url=", d.get("html_url"))
+          print("cname=", d.get("cname"))
           print("status=", d.get("status"))
-          print("source=", d.get("build_type") or d.get("source"))
           PY
             exit 0
           fi
-          echo "::error::GitHub Pages ist nicht aktiv. Settings → Pages → Source = GitHub Actions speichern."
+          echo "::error::Pages Source = GitHub Actions setzen, dann Custom domain moreatm.com."
           echo "https://github.com/${GITHUB_REPOSITORY}/settings/pages"
           echo "API status=$code"
           cat /tmp/pages.json || true
@@ -65,17 +66,17 @@ jobs:
             index.html
             404.html
             robots.txt
+            CNAME
             .nojekyll
           sparse-checkout-cone-mode: false
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Assemble artifact
         run: |
           set -euo pipefail
           mkdir -p _site
-          test -f index.html
-          cp index.html _site/index.html
-          cp 404.html _site/404.html
-          cp robots.txt _site/robots.txt
+          cp index.html 404.html robots.txt CNAME _site/
           touch _site/.nojekyll
           find _site -type f | sort
       - uses: actions/upload-pages-artifact@v3

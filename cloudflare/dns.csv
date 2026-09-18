@@ -1,6 +1,7 @@
 Type,Name,Content,Proxy status,TTL,Comment
-CNAME,@,moreatm.pages.dev,Proxied,Auto,ATM apex flattening — Pages host after first deploy
-CNAME,www,moreatm.com,Proxied,Auto,www to apex
-TXT,_hold,"MCT-ATM HOLD 2026-09-18 proposal!=execution observe-only",DNS only,Auto,Trace HOLD
+CNAME,@,spacebum9.github.io,DNS only,Auto,Apex flattening to GitHub Pages — grey cloud until cert works
+CNAME,www,spacebum9.github.io,DNS only,Auto,www to Pages
+TXT,_github-pages-challenge-spacebum9,PENDING,DNS only,Auto,replace with GitHub challenge token when Pages asks
+TXT,_hold,"MCT-ATM HOLD 2026-09-18 public=moreatm.com owner-hidden",DNS only,Auto,Trace
 TXT,@,"v=spf1 -all",DNS only,Auto,no mail
-TXT,_dmarc,"v=DMARC1; p=reject; adkim=s; aspf=s",DNS only,Auto,reject mail spoof
+TXT,_dmarc,"v=DMARC1; p=reject; adkim=s; aspf=s",DNS only,Auto,reject spoof

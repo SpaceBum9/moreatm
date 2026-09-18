@@ -1,27 +1,25 @@
-# moreatm.com — MCT / GARAS ATM-Fläche
+# moreatm — öffentliche ATM-Fläche
 
-Live (GitHub Pages, Projektseite):
-**https://spacebum9.github.io/moreatm/**
+Öffentliche Adresse (ohne SpaceBum9 im Host):
+**https://moreatm.com**
 
-Custom Domain moreatm.com bleibt HOLD, bis Cloudflare-NS stehen.
+Interner Publish-Pfad (GitHub, nicht für Besucher):
+`spacebum9.github.io/moreatm` — bleibt Backend.
 
-| Schicht | Ort |
-|---|---|
-| ATM-Fläche | diese Pages-URL |
-| Systemkarte | https://mct-garas-system.crystalmike.chatgpt.site |
-| Governance | https://github.com/SpaceBum9/MCT-1700021 |
-| Runtime | https://github.com/SpaceBum9/MCT-2600027 |
+`CNAME` im Repo = `moreatm.com`.
 
-## Pages
+## Zwei Klicks + DNS
 
-Quelle: GitHub Actions Workflow `.github/workflows/pages.yml`
-Branch: `main`
-Artifact: nur `index.html` (kein Worker, keine API)
+1. https://github.com/SpaceBum9/moreatm/settings/pages  
+   Source = **GitHub Actions**
+2. Custom domain = **moreatm.com** · Enforce HTTPS
+3. Cloudflare DNS (grau, nicht proxied bis Zertifikat steht):
 
-Falls der erste Lauf auf "Pages is not configured" läuft:
-Repo → Settings → Pages → Source = **GitHub Actions** → Save.
-Danach Actions → Deploy GitHub Pages → Run workflow.
+```
+CNAME  @    spacebum9.github.io
+CNAME  www  spacebum9.github.io
+```
 
-## Grenze
+GitHub zeigt danach ggf. einen TXT-Challenge — Token in `_github-pages-challenge-spacebum9` eintragen.
 
-Vorschlag ≠ Ausführung. Kein Send/Withdraw.
+Ohne Domain-NS gibt es **keine** github.io-URL ohne Usernamen. Projektseiten heißen immer `<user>.github.io/<repo>`.
