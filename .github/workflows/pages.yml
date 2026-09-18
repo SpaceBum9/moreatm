@@ -3,6 +3,12 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main]
+    paths:
+      - "index.html"
+      - "404.html"
+      - "robots.txt"
+      - ".nojekyll"
+      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -12,24 +18,79 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  preflight:
+    name: Pages source check
     runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Require Pages site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /tmp/pages.json -w "%{http_code}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages")
+          if [ "$code" = "200" ]; then
+            echo "Pages site present"
+            python3 - <<'PY'
+          import json
+          d=json.load(open("/tmp/pages.json"))
+          print("html_url=", d.get("html_url"))
+          print("status=", d.get("status"))
+          print("source=", d.get("build_type") or d.get("source"))
+          PY
+            exit 0
+          fi
+          echo "::error::GitHub Pages ist nicht aktiv. Settings → Pages → Source = GitHub Actions speichern."
+          echo "https://github.com/${GITHUB_REPOSITORY}/settings/pages"
+          echo "API status=$code"
+          cat /tmp/pages.json || true
+          exit 1
+
+  build:
+    name: Stage static surface
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            index.html
+            404.html
+            robots.txt
+            .nojekyll
+          sparse-checkout-cone-mode: false
       - uses: actions/configure-pages@v5
-      - name: Stage static surface
+      - name: Assemble artifact
         run: |
+          set -euo pipefail
           mkdir -p _site
+          test -f index.html
           cp index.html _site/index.html
+          cp 404.html _site/404.html
+          cp robots.txt _site/robots.txt
           touch _site/.nojekyll
+          find _site -type f | sort
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+          retention-days: 7
+
+  deploy:
+    name: Publish
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v4
