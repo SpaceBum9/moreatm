@@ -1,0 +1,4 @@
+Type,Name,Content,Proxy status,TTL,Comment
+A,zt,10.14.0.1,DNS only,Auto,ZeroTier gateway — overlay only
+A,gw,10.14.0.1,DNS only,Auto,alias gateway
+TXT,_zt,"net=10.14.0.0/16 hold=1 public=0",DNS only,Auto,trace overlay bound not public
