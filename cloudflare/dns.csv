@@ -1,0 +1,6 @@
+Type,Name,Content,Proxy status,TTL,Comment
+CNAME,@,moreatm.pages.dev,Proxied,Auto,ATM apex flattening — Pages host after first deploy
+CNAME,www,moreatm.com,Proxied,Auto,www to apex
+TXT,_hold,"MCT-ATM HOLD 2026-09-18 proposal!=execution observe-only",DNS only,Auto,Trace HOLD
+TXT,@,"v=spf1 -all",DNS only,Auto,no mail
+TXT,_dmarc,"v=DMARC1; p=reject; adkim=s; aspf=s",DNS only,Auto,reject mail spoof

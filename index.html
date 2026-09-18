@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>moreatm — MCT / GARAS Übergabefläche</title>
+  <meta name="description" content="ATM-Schicht des MCT/GARAS System of Systems. Schnittstellen und Übergaben. Vorschlag ist nicht Ausführung." />
+  <meta name="robots" content="index,follow" />
+  <style>
+    :root {
+      --bg: #0c0d0b;
+      --fg: #e8e4d4;
+      --muted: #9a947f;
+      --line: #2a2c24;
+      --hold: #c4a35a;
+      --ok: #8fa37a;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 ui-sans-serif, system-ui, sans-serif; }
+    main { max-width: 44rem; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+    header p { color: var(--muted); letter-spacing: .08em; text-transform: uppercase; font-size: .72rem; margin: 0 0 1rem; }
+    h1 { font-size: 2rem; font-weight: 560; letter-spacing: -.02em; margin: 0 0 .5rem; }
+    .lede { color: var(--muted); margin: 0 0 2rem; }
+    .hold {
+      border: 1px solid var(--hold);
+      color: var(--hold);
+      padding: .6rem .8rem;
+      font-size: .85rem;
+      margin: 0 0 2rem;
+    }
+    section { border-top: 1px solid var(--line); padding: 1.4rem 0; }
+    h2 { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 560; margin: 0 0 .8rem; }
+    dl { margin: 0; }
+    dt { font-weight: 560; margin-top: .7rem; }
+    dd { margin: .15rem 0 0; color: var(--muted); }
+    ul { margin: 0; padding-left: 1.1rem; color: var(--muted); }
+    a { color: var(--fg); }
+    footer { margin-top: 2.5rem; color: var(--muted); font-size: .8rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p>MCT / GARAS · System 04</p>
+      <h1>moreatm.com</h1>
+      <p class="lede">Öffentliche Übergabefläche. Schnittstellen tauschen Beiträge, ohne Teilsysteme festzukoppeln.</p>
+    </header>
+
+    <div class="hold">HOLD · 2026-09-18 · Vorschlag ≠ Ausführung · keine Send-/Withdraw-Rail</div>
+
+    <section>
+      <h2>Was ATM hier ist</h2>
+      <p>ATM ist die Sprache für Übergaben. Nicht ein Kontoautomat, keine Auszahlungsstelle.</p>
+    </section>
+
+    <section>
+      <h2>Zuordnung</h2>
+      <dl>
+        <dt>ATM</dt><dd>diese Fläche — Ports und Formate</dd>
+        <dt>MCT</dt><dd>Kontext und Herkunft hinter jeder Übergabe</dd>
+        <dt>GARAS</dt><dd>reproduzierbare Bewertung, kein Autopilot</dd>
+        <dt>RC</dt><dd>kurzer Prüfrhythmus</dd>
+        <dt>BILO</dt><dd>Benefit, Inclusion, Livelihood, Openness</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Quellen</h2>
+      <ul>
+        <li><a href="https://mct-garas-system.crystalmike.chatgpt.site/">Systemkarte</a></li>
+        <li><a href="https://github.com/SpaceBum9/MCT-1700021">MCT-1700021 Governance</a></li>
+        <li><a href="https://github.com/SpaceBum9/MCT-2600027">MCT-2600027 Runtime</a></li>
+        <li><a href="https://github.com/SpaceBum9/MCT-2600027/tree/main/packages/zero-tier-connectors">Zero-Tier Connectors</a></li>
+        <li><a href="https://github.com/SpaceBum9/moreatm">dieses Repo</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Grenze</h2>
+      <ul>
+        <li>Technische Fähigkeit erzeugt keine Berechtigung.</li>
+        <li>Freigabe bleibt sichtbar und menschlich.</li>
+        <li>Fiat-Pool nur beobachten.</li>
+      </ul>
+    </section>
+
+    <footer>SpaceBum9 / Crystal Mike · Cloudflare edge vorgesehen · Zone binden bleibt ein manueller Schritt.</footer>
+  </main>
+</body>
+</html>

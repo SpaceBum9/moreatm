@@ -1,0 +1,42 @@
+{
+  "zone": "moreatm.com",
+  "plan": "free",
+  "ssl": {
+    "mode": "full_strict_after_pages_bind",
+    "always_use_https": true,
+    "min_tls_version": "1.2",
+    "automatic_https_rewrites": true,
+    "opportunistic_encryption": true,
+    "tls_1_3": "on",
+    "hsts": {
+      "enabled": false,
+      "note": "enable only after stable HTTPS"
+    }
+  },
+  "security": {
+    "level": "medium",
+    "bot_fight_mode": true,
+    "email_obfuscation": true,
+    "hotlink_protection": true,
+    "challenge_passage": 1800
+  },
+  "network": {
+    "http2": true,
+    "http3": true,
+    "0rtt": true,
+    "ipv6": true,
+    "websockets": false,
+    "pseudo_ipv4": "off"
+  },
+  "denied_worker_actions": [
+    "send",
+    "withdraw",
+    "auto-contribute",
+    "store-credentials"
+  ],
+  "allowed_worker_actions": [
+    "static-serve",
+    "observe-status",
+    "redirect-https"
+  ]
+}
